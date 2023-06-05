@@ -5,12 +5,13 @@ from facebook_business.api import FacebookAdsApi
 from facebook_business.adobjects.page import Page
 
 app = Flask(__name__)
-my_app_id = os.getenv('APP_ID')
-my_app_secret = os.getenv('APP_SECRET')
-access_token = os.getenv('PAGE_TOKEN')
-id = os.getenv('AD_ACCOUNT_ID')
-FacebookAdsApi.init(my_app_id, my_app_secret, access_token)
-load_dotenv()
+class Lead(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    created_time = db.Column(db.String(), nullable=False)
+    fieldData = db.Column(db.String(), nullable=False)
+
+    def __repr__(self):
+        return 'lead: ' + self.created_time
 
 
 @app.route('/leads-campaign', methods=['POST'])
