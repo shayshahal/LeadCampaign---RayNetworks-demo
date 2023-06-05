@@ -3,7 +3,6 @@ import os
 from dotenv import load_dotenv
 from facebook_business.api import FacebookAdsApi
 from facebook_business.adobjects.page import Page
-from facebook_business.adobjects.leadgenform import LeadgenForm
 
 app = Flask(__name__)
 my_app_id = os.getenv('APP_ID')
