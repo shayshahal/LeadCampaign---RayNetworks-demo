@@ -15,7 +15,7 @@ load_dotenv()
 
 
 @app.route('/', methods=['POST'])
-def hello():
+def createLead():
     if ('name' in request.args):
         page = Page(os.getenv('PAGE_ID'))
         page.create_lead_gen_form([], {'name': request.args.get(
