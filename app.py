@@ -13,15 +13,14 @@ FacebookAdsApi.init(my_app_id, my_app_secret, access_token)
 load_dotenv()
 
 
-@app.route('/', methods=['POST'])
+@app.route('/leads-campaign', methods=['POST'])
 def createLead():
-    if ('name' in request.args):
-        page = Page(os.getenv('PAGE_ID'))
-        page.create_lead_gen_form([], {'name': request.args.get(
-            'name'), 'questions': [{'type': 'EMAIL'}, {'type': 'FULL_NAME'}], 'privacy_policy': {'url': 'www.google.com'}, 'follow_up_action_url': 'www.google.com'})
-        return 'success', 200
-    else:
-        return 'bad args, must have name', 400
+    page = Page(page_id)
+    page.create_lead_gen_form([], {'name': 'leads-campaign', 'questions': [{'type': 'EMAIL'}, {
+                                        'type': 'FULL_NAME'}], 'privacy_policy': {'url': 'www.google.com'}, 'follow_up_action_url': 'www.google.com'})
+    return 'success', 200
+
+    return 'success', 200
 
 
 if __name__ == '__main__':
