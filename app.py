@@ -19,6 +19,7 @@ db.init_app(app)
 migrate = Migrate(app, db)
 FacebookAdsApi.init(access_token=access_token, api_version='v17.0')
 
+
 class Lead(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     created_time = db.Column(db.String(), nullable=False)
@@ -32,8 +33,9 @@ class Lead(db.Model):
 def createLead():
     page = Page(page_id)
     page.create_lead_gen_form([], {'name': 'leads-campaign', 'questions': [{'type': 'EMAIL'}, {
-                                        'type': 'FULL_NAME'}], 'privacy_policy': {'url': 'www.google.com'}, 'follow_up_action_url': 'www.google.com'})
+        'type': 'FULL_NAME'}], 'privacy_policy': {'url': 'www.google.com'}, 'follow_up_action_url': 'www.google.com'})
     return 'success', 200
+
 
 @app.route('/leads-campaign')
 def getLeadsFromLast24H():
@@ -57,6 +59,7 @@ def getLeadsFromLast24H():
         db.session.add(lead)
     db.session.commit()
     return 'success', 200
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=3000)
