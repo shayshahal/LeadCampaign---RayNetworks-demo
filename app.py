@@ -8,7 +8,17 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from dotenv import load_dotenv
 
+load_dotenv()
+access_token = os.getenv('PAGE_TOKEN')
+page_id = os.getenv('PAGE_ID')
+
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.sqlite'
+db = SQLAlchemy()
+db.init_app(app)
+migrate = Migrate(app, db)
+FacebookAdsApi.init(access_token=access_token, api_version='v17.0')
+
 class Lead(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     created_time = db.Column(db.String(), nullable=False)
@@ -47,7 +57,6 @@ def getLeadsFromLast24H():
         db.session.add(lead)
     db.session.commit()
     return 'success', 200
-
 
 if __name__ == '__main__':
     app.run(debug=True, port=3000)
