@@ -1,0 +1,1 @@
+from .graphqlController import graphql_blueprint

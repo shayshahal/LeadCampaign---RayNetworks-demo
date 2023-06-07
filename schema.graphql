@@ -1,0 +1,21 @@
+type Lead {
+	id: String!
+	time_created: String!
+	field_Data: [Question]!
+}
+
+type LeadgenForm {
+	name: String!
+	questions: [Question!]!
+	privacy_policy: String!
+	follow_up_action_url: String!
+}
+scalar Question
+type Query {
+	get_leads: [Lead!]!
+	create_leadgenForm: LeadgenForm!
+}
+
+type Mutation {
+	createLeadgenForm: LeadgenForm!
+}
